@@ -1,0 +1,25 @@
+{
+  "name": "candy-store-project",
+  "version": "1.0.0",
+  "description": "Project for ClearScholar",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+   "dependencies": {
+    "express" : "~4.5.1",
+	"mongoose" : "~3.8.0",
+	"body-parser" : "~1.4.2",
+	"method-override" : "~2.0.2"
+  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heetvachhani/CandyStore.git"
+  },
+  "author": "Hit Vachhani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heetvachhani/CandyStore/issues"
+  },
+  "homepage": "https://github.com/heetvachhani/CandyStore#readme"
+}
