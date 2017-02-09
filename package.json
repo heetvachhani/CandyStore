@@ -1,25 +1,32 @@
 {
-  "name": "candy-store-project",
+  "name": "ClearScholar",
   "version": "1.0.0",
-  "description": "Project for ClearScholar",
+  "description": "ClearScholar project challenge",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-   "dependencies": {
-    "express" : "~4.5.1",
-	"mongoose" : "~3.8.0",
-	"body-parser" : "~1.4.2",
-	"method-override" : "~2.0.2"
-  }
   "repository": {
     "type": "git",
-    "url": "https://github.com/heetvachhani/CandyStore.git"
+    "url": "git+https://github.com/heetvachhani/CandyStore.git"
   },
-  "author": "Hit Vachhani",
+  "dependencies": {
+    "express" : "~4.5.1",
+    "mongoose" : "~3.8.0",
+    "body-parser" : "~1.4.2",
+    "method-override" : "~2.0.2"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/heetvachhani/CandyStore/issues"
   },
-  "homepage": "https://github.com/heetvachhani/CandyStore#readme"
+  "homepage": "https://github.com/heetvachhani/CandyStore#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-react": "^6.9.0"
+  }
 }
