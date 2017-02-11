@@ -46,7 +46,8 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.11.0",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "lodash.assign": "^4.2.0"
   },
   "keywords": [
     "ExpressJS",
