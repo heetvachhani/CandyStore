@@ -7,6 +7,7 @@ exports.getAllHandler = function (req, res){
   //app.get('/candy)'
   UserModel.find({}, function(err, theArray){
     if (!err){
+    	console.log(" here!");
       res.json(theArray);
     }
     else{
