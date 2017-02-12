@@ -2,7 +2,7 @@ import React from 'react';
 
 const TextFieldGroup = ({ label, error, ...props }) => {
 
-const divStyle = {
+const styles = {
     formGroup: {
       marginBottom: '15px'
     },
@@ -46,14 +46,13 @@ const divStyle = {
 };
 
   return (
-    <div style={divStyle.fieldSet}>
+    <div style={styles.fieldSet}>
       <input
-        style={divStyle.formControl}
+        style={styles.formControl}
         type="input"
-        className="form-control"
         {...props}
       />
-      <label style={divStyle.label}>{label}</label> <br />
+      <label style={styles.label}>{label}</label> <br />
       
     {props.touched && props.error && <span className="error">{props.error}</span>}
     </div>  );

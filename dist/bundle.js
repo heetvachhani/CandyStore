@@ -59667,6 +59667,10 @@ var _TextField = require('./TextField');
 
 var _TextField2 = _interopRequireDefault(_TextField);
 
+var _SelectField = require('./SelectField');
+
+var _SelectField2 = _interopRequireDefault(_SelectField);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -59685,6 +59689,20 @@ var renderTextField = function renderTextField(_ref) {
   }, input, custom));
 };
 
+var renderSelectField = function renderSelectField(_ref2) {
+  var input = _ref2.input,
+      label = _ref2.label,
+      _ref2$meta = _ref2.meta,
+      touched = _ref2$meta.touched,
+      error = _ref2$meta.error,
+      custom = _objectWithoutProperties(_ref2, ['input', 'label', 'meta']);
+
+  return _react2.default.createElement(_SelectField2.default, _extends({
+    label: label,
+    error: touched && error
+  }, input, custom));
+};
+
 var Form = function Form(props) {
   var handleSubmit = props.handleSubmit,
       pristine = props.pristine,
@@ -59694,66 +59712,33 @@ var Form = function Form(props) {
   return _react2.default.createElement(
     'form',
     { onSubmit: handleSubmit },
+    _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: renderTextField, type: 'text', label: 'First Name' }),
+    _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: renderTextField, type: 'text', label: 'Last Name' }),
+    _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: renderTextField, type: 'text', label: 'company' }),
+    _react2.default.createElement(_reduxForm.Field, { name: 'web', component: renderTextField, type: 'text', label: 'web' }),
+    _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: renderTextField, type: 'text', label: 'Phone' }),
     _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: renderTextField, type: 'text', label: 'First Name' })
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: renderTextField, type: 'text', label: 'Last Name' })
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: renderTextField, type: 'text', label: 'company' })
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reduxForm.Field, { name: 'web', component: renderTextField, type: 'text', label: 'web' })
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: renderTextField, type: 'text', label: 'Phone' })
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
+      _reduxForm.Field,
+      { name: 'speciality', component: renderSelectField, label: 'Candy Speciality' },
       _react2.default.createElement(
-        'label',
-        null,
-        'Candy Speciality '
+        'option',
+        { value: 'chocolate' },
+        'Chocolate'
       ),
       _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _reduxForm.Field,
-          { name: 'speciality', component: 'select' },
-          _react2.default.createElement(
-            'option',
-            { value: 'chocolate' },
-            'chocolate'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'lollipop' },
-            'Lollipops'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'gum' },
-            'Gum'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'sour' },
-            'Sour hard candies'
-          )
-        )
+        'option',
+        { value: 'lollipop' },
+        'Lollipops'
+      ),
+      _react2.default.createElement(
+        'option',
+        { value: 'gum' },
+        'Gum'
+      ),
+      _react2.default.createElement(
+        'option',
+        { value: 'sour' },
+        'Sour Hard Cndies'
       )
     ),
     _react2.default.createElement(
@@ -59763,11 +59748,6 @@ var Form = function Form(props) {
         'button',
         { type: 'submit', disabled: pristine || submitting },
         'Submit'
-      ),
-      _react2.default.createElement(
-        'button',
-        { type: 'button', disabled: pristine || submitting, onClick: reset },
-        'Clear Values'
       )
     )
   );
@@ -59777,7 +59757,111 @@ exports.default = (0, _reduxForm.reduxForm)({
   form: 'simple' // a unique identifier for this form
 })(Form);
 
-},{"./TextField":647,"react":564,"redux-form":603}],647:[function(require,module,exports){
+},{"./SelectField":647,"./TextField":648,"react":564,"redux-form":603}],647:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var SelectFieldGroup = function SelectFieldGroup(_ref) {
+  var label = _ref.label,
+      error = _ref.error,
+      children = _ref.children,
+      props = _objectWithoutProperties(_ref, ['label', 'error', 'children']);
+
+  var styles = {
+    formGroup: {
+      marginBottom: '15px'
+    },
+    inlineLabel: {
+      position: 'relative'
+    },
+    fieldSet: {
+      position: 'relative',
+      marginBottom: '15px',
+      boxSizing: 'border-box',
+      minWidth: 0,
+      padding: 0,
+      margin: 0,
+      border: 0
+    },
+    label: {
+      position: 'absolute',
+      top: 0,
+      fontSize: '12px',
+      color: '#00A1DF',
+      fontWeight: '100',
+      padding: '2px 9px',
+      letterSpacing: '1px',
+      display: 'inline-block',
+      maxWidth: '100%',
+      marginBottom: '5px'
+    },
+    formControl: {
+      paddingTop: '24px',
+      height: 'auto',
+      display: 'block',
+      width: '32%',
+      padding: '16px 9px 3px',
+      fontSize: '20px',
+      lineHeight: '1.42857143',
+      letterSpacing: '1px',
+      color: '#555',
+      border: '1px solid #ccc',
+      backgroundColor: '#fff',
+      borderRadius: 0,
+      WebkitAppearance: 'none'
+    }
+  };
+
+  return _react2.default.createElement(
+    'div',
+    { style: styles.fieldSet },
+    _react2.default.createElement(
+      'select',
+      _extends({ style: styles.formControl,
+        type: 'select'
+      }, props),
+      children
+    ),
+    _react2.default.createElement(
+      'label',
+      { style: styles.label },
+      label
+    ),
+    ' ',
+    _react2.default.createElement('br', null),
+    props.touched && props.error && _react2.default.createElement(
+      'span',
+      { className: 'error' },
+      props.error
+    )
+  );
+};
+
+SelectFieldGroup.propTypes = {
+  label: _react2.default.PropTypes.string.isRequired,
+  error: _react2.default.PropTypes.bool
+};
+
+SelectFieldGroup.defaultProps = {
+  type: 'text'
+};
+
+exports.default = SelectFieldGroup;
+
+},{"react":564}],648:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -59799,7 +59883,7 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
       error = _ref.error,
       props = _objectWithoutProperties(_ref, ['label', 'error']);
 
-  var divStyle = {
+  var styles = {
     formGroup: {
       marginBottom: '15px'
     },
@@ -59844,15 +59928,14 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { style: divStyle.fieldSet },
+    { style: styles.fieldSet },
     _react2.default.createElement('input', _extends({
-      style: divStyle.formControl,
-      type: 'input',
-      className: 'form-control'
+      style: styles.formControl,
+      type: 'input'
     }, props)),
     _react2.default.createElement(
       'label',
-      { style: divStyle.label },
+      { style: styles.label },
       label
     ),
     ' ',
@@ -59876,7 +59959,7 @@ TextFieldGroup.defaultProps = {
 
 exports.default = TextFieldGroup;
 
-},{"react":564}],648:[function(require,module,exports){
+},{"react":564}],649:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -59987,6 +60070,6 @@ _reactDom2.default.render(_react2.default.createElement(
   )
 ), document.getElementById('app'));
 
-},{"./components/App":645,"./components/Form":646,"jquery":169,"material-ui/styles/MuiThemeProvider":366,"material-ui/styles/getMuiTheme":369,"react":564,"react-dom":393,"react-redux":526,"react-tap-event-plugin":534,"redux":638,"redux-form":603,"redux-thunk":632}]},{},[648])
+},{"./components/App":645,"./components/Form":646,"jquery":169,"material-ui/styles/MuiThemeProvider":366,"material-ui/styles/getMuiTheme":369,"react":564,"react-dom":393,"react-redux":526,"react-tap-event-plugin":534,"redux":638,"redux-form":603,"redux-thunk":632}]},{},[649])
 
 //# sourceMappingURL=bundle.js.map
