@@ -1,4 +1,4 @@
-import * as c from './constants';
+import * as c from '../constants/constants';
 
 export function update(name, value) {
   return dispatch => dispatch({

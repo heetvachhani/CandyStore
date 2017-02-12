@@ -15,6 +15,7 @@ export default class App extends Component {
   render() {
   	return (
 		<div>
+			<form>
 			<TextField
 		      floatingLabelText="First Name"
 		      floatingLabelFixed={true}
@@ -52,6 +53,7 @@ export default class App extends Component {
 		          <MenuItem value={4} primaryText="Sour hard candies" />
 		    </SelectField><br />
 		  	<RaisedButton label="Submit" primary={true} />
+		  	</form>
 		</div>
   	);
   }

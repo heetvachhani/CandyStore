@@ -1,4 +1,4 @@
-import * as c from './constants';
+import * as c from './constants/constants';
 import assign from 'lodash.assign';
 
 const initialState = { //define initial state - an empty form

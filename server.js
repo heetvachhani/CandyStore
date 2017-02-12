@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 
-var port = process.env.PORT || 3000;
+var port = 9000;
 app.listen(port, function(){
 	console.log(('HTTP server is listening on port: ' + port));
 });
