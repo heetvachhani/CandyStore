@@ -5,6 +5,7 @@ var UserModel = mongoose.model( 'UserModel' );
 
 exports.getAllHandler = function (req, res){
   //app.get('/candy)'
+  console.log(" here!");
   UserModel.find({}, function(err, theArray){
     if (!err){
     	console.log(" here!");

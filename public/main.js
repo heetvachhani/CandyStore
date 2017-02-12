@@ -42,7 +42,7 @@ const showResults = values =>
     setTimeout(() => {  // simulate server latency
      // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
       				$.ajax({
-                        url: "http://localhost:9000/candy",
+                        url: "/candy",
                         type: 'POST',
                         data: values,
                         beforeSend: function() {
