@@ -20,7 +20,8 @@ const styles = {
     },
     label: {
       position: 'absolute',
-      top: 0,
+      top: '0px',
+      left: '0px',
       fontSize: '12px',
       color: '#00A1DF',
       fontWeight: '100',
@@ -33,7 +34,6 @@ const styles = {
     formControl: {
       paddingTop: '24px',
       height: 'auto',
-      display: 'block',
       width: '32%',
       padding: '16px 9px 3px',
       fontSize: '20px',
@@ -48,6 +48,7 @@ const styles = {
 };
   
   return (
+    <div>
     <div style={styles.fieldSet}>
       <select style={styles.formControl}
         type="select"
@@ -55,13 +56,11 @@ const styles = {
          {children}
         </select>
 
-      <label style={styles.label}>{label}</label> <br />
-      
-    {props.touched && props.error && <span className="error">{props.error}</span>}
-    </div>  );
+      <label style={styles.label}>{label}</label> 
+    </div>
+    <br />
+    </div>);
 }
-
-
 
 SelectFieldGroup.propTypes = {
   label: React.PropTypes.string.isRequired,

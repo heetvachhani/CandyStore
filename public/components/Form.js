@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from './TextField';
 import SelectField from './SelectField';
 
+
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
   <TextField
     label={label} 
@@ -11,7 +12,6 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
     {...custom}
   />
 );
-
 const renderSelectField = ({ input, label, meta: { touched, error }, ...custom }) => (
   <SelectField
     label={label} 
@@ -20,6 +20,33 @@ const renderSelectField = ({ input, label, meta: { touched, error }, ...custom }
     {...custom}
   />
 );
+
+const styles = {
+    btn: {
+      color: '#fff',
+      backgroundColor: '#00A1DF',
+      borderRadius: '4px',
+      width: '20%',
+      display: 'inline-block',
+      padding: '6px 12px',
+      marginBottom: 0,
+      fontSize: '14px',
+      fontWeight: 400,
+      lineHeight: '1.42857143',
+      textAlign: 'center',
+      whiteSpace: 'nowrap',
+      verticalAlign: 'middle',
+      MsTouchAction: 'manipulation',
+      touchAction: 'manipulation',
+      cursor: 'pointer',
+      WebkitUserSelect: 'none',
+      MozUserSelect: 'none',
+      MsUserSelect: 'none',
+      userSelect: 'none',
+      backgroundImage: 'none',
+      border: '1px solid transparent'
+    },
+ };
 
 const Form = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props
@@ -44,12 +71,39 @@ const Form = (props) => {
           </Field>
        
       <div>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
+        <button type="submit" style={styles.btn} disabled={pristine || submitting}>Submit</button>
       </div>
     </form>
   )
 }
 
+const validate = values => {
+  const errors = {}
+  if (!values.fname) {
+    errors.fname = 'Please enter a first name';
+  }
+  if (!values.lname) {
+    errors.lname = 'Please enter a last name';
+  }
+  if (!values.cname) {
+    errors.cname = 'Please enter a company name';
+  }
+  if (!values.web) {
+    errors.web = 'Please enter a web address';
+  }
+  if (!values.phone) {
+    errors.phone = 'Please enter a phone number';
+  }
+  if (!/^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/.test(values.web)) {
+    errors.web = 'Invalid web address'
+  }
+  if(!/^\d{10}$/.test(values.phone)){
+    errors.phone = 'Invalid phone number';
+  }
+  return errors
+}
+
 export default reduxForm({
-  form: 'simple'  // a unique identifier for this form
+  form: 'simple',  // a unique identifier for this form
+  validate
 })(Form)
