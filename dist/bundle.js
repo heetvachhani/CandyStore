@@ -59536,38 +59536,6 @@ module.exports = warning;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.update = update;
-exports.reset = reset;
-
-var _constants = require('../constants/constants');
-
-var c = _interopRequireWildcard(_constants);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function update(name, value) {
-  return function (dispatch) {
-    return dispatch({
-      type: c.FORM_UPDATE_VALUE,
-      name: name, value: value
-    });
-  };
-}
-
-function reset() {
-  return function (dispatch) {
-    return dispatch({
-      type: c.FORM_RESET
-    });
-  };
-}
-
-},{"../constants/constants":648}],646:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
 		value: true
 });
 
@@ -59680,12 +59648,14 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"material-ui/MenuItem":335,"material-ui/RaisedButton":342,"material-ui/SelectField":344,"material-ui/TextField":354,"react":564}],647:[function(require,module,exports){
+},{"material-ui/MenuItem":335,"material-ui/RaisedButton":342,"material-ui/SelectField":344,"material-ui/TextField":354,"react":564}],646:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
@@ -59693,7 +59663,27 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reduxForm = require('redux-form');
 
+var _TextField = require('./TextField');
+
+var _TextField2 = _interopRequireDefault(_TextField);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var renderTextField = function renderTextField(_ref) {
+  var input = _ref.input,
+      label = _ref.label,
+      _ref$meta = _ref.meta,
+      touched = _ref$meta.touched,
+      error = _ref$meta.error,
+      custom = _objectWithoutProperties(_ref, ['input', 'label', 'meta']);
+
+  return _react2.default.createElement(_TextField2.default, _extends({
+    label: label,
+    error: touched && error
+  }, input, custom));
+};
 
 var Form = function Form(props) {
   var handleSubmit = props.handleSubmit,
@@ -59707,72 +59697,27 @@ var Form = function Form(props) {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(
-        'label',
-        null,
-        'First Name'
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: 'input', type: 'text', placeholder: 'First Name' })
-      )
+      _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: renderTextField, type: 'text', label: 'First Name' })
     ),
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(
-        'label',
-        null,
-        'Last Name'
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: 'input', type: 'text', placeholder: 'Last Name' })
-      )
+      _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: renderTextField, type: 'text', label: 'Last Name' })
     ),
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(
-        'label',
-        null,
-        'Company'
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: 'input', type: 'text', placeholder: 'company' })
-      )
+      _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: renderTextField, type: 'text', label: 'company' })
     ),
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(
-        'label',
-        null,
-        'Web Address'
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reduxForm.Field, { name: 'web', component: 'input', type: 'text', placeholder: 'web' })
-      )
+      _react2.default.createElement(_reduxForm.Field, { name: 'web', component: renderTextField, type: 'text', label: 'web' })
     ),
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(
-        'label',
-        null,
-        'Phone'
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: 'input', type: 'text', placeholder: 'Phone' })
-      )
+      _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: renderTextField, type: 'text', label: 'Phone' })
     ),
     _react2.default.createElement(
       'div',
@@ -59832,16 +59777,106 @@ exports.default = (0, _reduxForm.reduxForm)({
   form: 'simple' // a unique identifier for this form
 })(Form);
 
-},{"react":564,"redux-form":603}],648:[function(require,module,exports){
+},{"./TextField":647,"react":564,"redux-form":603}],647:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var FORM_UPDATE_VALUE = exports.FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
-var FORM_RESET = exports.FORM_RESET = 'FORM_RESET';
 
-},{}],649:[function(require,module,exports){
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var TextFieldGroup = function TextFieldGroup(_ref) {
+  var label = _ref.label,
+      error = _ref.error,
+      props = _objectWithoutProperties(_ref, ['label', 'error']);
+
+  var divStyle = {
+    formGroup: {
+      marginBottom: '15px'
+    },
+    inlineLabel: {
+      position: 'relative'
+    },
+    fieldSet: {
+      position: 'relative',
+      marginBottom: '15px',
+      boxSizing: 'border-box',
+      minWidth: 0,
+      padding: 0,
+      margin: 0,
+      border: 0
+    },
+    label: {
+      position: 'absolute',
+      top: 0,
+      fontSize: '12px',
+      color: '#00A1DF',
+      fontWeight: '100',
+      padding: '2px 9px',
+      letterSpacing: '1px',
+      display: 'inline-block',
+      maxWidth: '100%',
+      marginBottom: '5px'
+    },
+    formControl: {
+      paddingTop: '24px',
+      height: 'auto',
+      display: 'block',
+      width: '30%',
+      padding: '16px 9px 3px',
+      fontSize: '20px',
+      lineHeight: '1.42857143',
+      letterSpacing: '1px',
+      color: '#555',
+      border: '1px solid #ccc',
+      backgroundColor: '#fff'
+    }
+  };
+
+  return _react2.default.createElement(
+    'div',
+    { style: divStyle.fieldSet },
+    _react2.default.createElement('input', _extends({
+      style: divStyle.formControl,
+      type: 'input',
+      className: 'form-control'
+    }, props)),
+    _react2.default.createElement(
+      'label',
+      { style: divStyle.label },
+      label
+    ),
+    ' ',
+    _react2.default.createElement('br', null),
+    props.touched && props.error && _react2.default.createElement(
+      'span',
+      { className: 'error' },
+      props.error
+    )
+  );
+};
+
+TextFieldGroup.propTypes = {
+  label: _react2.default.PropTypes.string.isRequired,
+  error: _react2.default.PropTypes.bool
+};
+
+TextFieldGroup.defaultProps = {
+  type: 'text'
+};
+
+exports.default = TextFieldGroup;
+
+},{"react":564}],648:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -59880,17 +59915,11 @@ var _Form = require('./components/Form');
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _actions = require('./action/actions');
-
-var actions = _interopRequireWildcard(_actions);
-
 var _reduxForm = require('redux-form');
 
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59930,19 +59959,19 @@ var showResults = function showResults(values) {
   return new Promise(function (resolve) {
     setTimeout(function () {
       // simulate server latency
-      // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-      _jquery2.default.ajax({
-        url: "/candy",
-        type: 'POST',
-        data: values,
-        beforeSend: function beforeSend() {
-          (0, _jquery2.default)("#msg").html("sending...");
-        },
-        success: function success(data) {
-          (0, _jquery2.default)("#msg").hide();
-          (0, _jquery2.default)("#response").html(data);
-        }
-      });
+      window.alert('You submitted:\n\n' + JSON.stringify(values, null, 2));
+      // $.ajax({
+      //               url: "/candy",
+      //               type: 'POST',
+      //               data: values,
+      //               beforeSend: function() {
+      //                   $("#msg").html("sending...");
+      //               },
+      //               success: function(data) {
+      //                   $("#msg").hide();
+      //                   $("#response").html(data);
+      //               }
+      //           });
       resolve();
     }, 500);
   });
@@ -59958,6 +59987,6 @@ _reactDom2.default.render(_react2.default.createElement(
   )
 ), document.getElementById('app'));
 
-},{"./action/actions":645,"./components/App":646,"./components/Form":647,"jquery":169,"material-ui/styles/MuiThemeProvider":366,"material-ui/styles/getMuiTheme":369,"react":564,"react-dom":393,"react-redux":526,"react-tap-event-plugin":534,"redux":638,"redux-form":603,"redux-thunk":632}]},{},[649])
+},{"./components/App":645,"./components/Form":646,"jquery":169,"material-ui/styles/MuiThemeProvider":366,"material-ui/styles/getMuiTheme":369,"react":564,"react-dom":393,"react-redux":526,"react-tap-event-plugin":534,"redux":638,"redux-form":603,"redux-thunk":632}]},{},[648])
 
 //# sourceMappingURL=bundle.js.map

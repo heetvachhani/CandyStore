@@ -1,39 +1,40 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import TextField from './TextField';
+
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+  <TextField
+    label={label} 
+    error={touched && error}
+    {...input}
+    {...custom}
+  />
+);
 
 const Form = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>First Name</label>
-        <div>
-          <Field name="fname" component="input" type="text" placeholder="First Name"/>
-        </div>
+        
+          <Field name="fname" component={renderTextField} type="text" label="First Name"/>
+        
       </div>
       <div>
-        <label>Last Name</label>
-        <div>
-          <Field name="lname" component="input" type="text" placeholder="Last Name"/>
-        </div>
+          <Field name="lname" component={renderTextField} type="text" label="Last Name"/>
+        
       </div>
       <div>
-        <label>Company</label>
-        <div>
-          <Field name="cname" component="input" type="text" placeholder="company"/>
-        </div>
+          <Field name="cname" component={renderTextField} type="text" label="company"/>
+        
       </div>
       <div>
-        <label>Web Address</label>
-        <div>
-          <Field name="web" component="input" type="text" placeholder="web"/>
-        </div>
+          <Field name="web" component={renderTextField} type="text" label="web"/>
+       
       </div>
       <div>
-        <label>Phone</label>
-        <div>
-          <Field name="phone" component="input" type="text" placeholder="Phone"/>
-        </div>
+          <Field name="phone" component={renderTextField} type="text" label="Phone"/>
+        
       </div>
       <div>
         <label>Candy Speciality </label>

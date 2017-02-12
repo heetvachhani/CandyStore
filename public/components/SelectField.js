@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextFieldGroup = ({ label, error, ...props }) => {
+const SelectFieldGroup = ({ label, error, ...props }) => {
 
 const divStyle = {
     formGroup: {
@@ -61,13 +61,13 @@ const divStyle = {
 
 
 
-TextFieldGroup.propTypes = {
+SelectFieldGroup.propTypes = {
   label: React.PropTypes.string.isRequired,
   error: React.PropTypes.bool,
 }
 
-TextFieldGroup.defaultProps = {
+SelectFieldGroup.defaultProps = {
   type: 'text'
 }
 
-export default TextFieldGroup;
+export default SelectFieldGroup;

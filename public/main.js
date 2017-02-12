@@ -8,7 +8,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import App from './components/App';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Form from './components/Form';
-import * as actions from './action/actions';
 import { connect } from 'react-redux';
 import { reducer as reduxFormReducer } from 'redux-form'
 import $ from 'jquery';
@@ -40,19 +39,19 @@ const store = createStoreWithMiddleware(reducer);
 const showResults = values =>
   new Promise(resolve => {
     setTimeout(() => {  // simulate server latency
-     // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-      				$.ajax({
-                        url: "/candy",
-                        type: 'POST',
-                        data: values,
-                        beforeSend: function() {
-                            $("#msg").html("sending...");
-                        },
-                        success: function(data) {
-                            $("#msg").hide();
-                            $("#response").html(data);
-                        }
-                    });
+     window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+      				// $.ajax({
+          //               url: "/candy",
+          //               type: 'POST',
+          //               data: values,
+          //               beforeSend: function() {
+          //                   $("#msg").html("sending...");
+          //               },
+          //               success: function(data) {
+          //                   $("#msg").hide();
+          //                   $("#response").html(data);
+          //               }
+          //           });
       resolve()
     }, 500)
   })

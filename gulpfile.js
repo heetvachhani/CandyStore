@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     autoprefixer = require('autoprefixer-stylus'),
     del = require('del'),
     browserSync = require('browser-sync'),
+    csscomb = require('gulp-csscomb');
     plumber = require('gulp-plumber');
 
 /*
@@ -63,6 +64,13 @@ function bundle() {
 gulp.task('html', function () {
   return gulp.src('./public/index.html')
     .pipe(gulp.dest('./dist/'))
+});
+
+
+gulp.task('styles', function() {
+  return gulp.src('public/styles.css')
+    .pipe(csscomb())
+    .pipe(gulp.dest('./dist/css'));
 });
 
 gulp.task('watch', function() {
