@@ -11,6 +11,7 @@ import Form from './components/Form';
 import * as actions from './action/actions';
 import { connect } from 'react-redux';
 import { reducer as reduxFormReducer } from 'redux-form'
+import $ from 'jquery';
 
 injectTapEventPlugin();
 
@@ -39,7 +40,19 @@ const store = createStoreWithMiddleware(reducer);
 const showResults = values =>
   new Promise(resolve => {
     setTimeout(() => {  // simulate server latency
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+     // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+      				$.ajax({
+                        url: "http://localhost:9000/candy",
+                        type: 'POST',
+                        data: values,
+                        beforeSend: function() {
+                            $("#msg").html("sending...");
+                        },
+                        success: function(data) {
+                            $("#msg").hide();
+                            $("#response").html(data);
+                        }
+                    });
       resolve()
     }, 500)
   })

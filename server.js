@@ -16,6 +16,11 @@ app.use(session({secret: "secret",  resave : true,  saveUninitialized : false}))
 app.use(express.static('./'));
 app.use(express.static('dist'));
 
+app.use(function(req, res, next) {
+ res.header("Access-Control-Allow-Origin", "*");
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+});
+
 
 // REST Routes
 app.get('/candy', routes.getAllHandler);  // return all records

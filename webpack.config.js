@@ -78,6 +78,7 @@ webpackConfig.plugins.push(
     inline: true,
     progress: true,
     historyApiFallback: true,
+    headers: { "Access-Control-Allow-Origin": "*" }
   };
 
 

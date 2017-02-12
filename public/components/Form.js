@@ -8,19 +8,19 @@ const Form = (props) => {
       <div>
         <label>First Name</label>
         <div>
-          <Field name="firstName" component="input" type="text" placeholder="First Name"/>
+          <Field name="fname" component="input" type="text" placeholder="First Name"/>
         </div>
       </div>
       <div>
         <label>Last Name</label>
         <div>
-          <Field name="lastName" component="input" type="text" placeholder="Last Name"/>
+          <Field name="lname" component="input" type="text" placeholder="Last Name"/>
         </div>
       </div>
       <div>
         <label>Company</label>
         <div>
-          <Field name="company" component="input" type="text" placeholder="company"/>
+          <Field name="cname" component="input" type="text" placeholder="company"/>
         </div>
       </div>
       <div>

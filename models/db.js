@@ -21,11 +21,17 @@ mongoose.connection.on('disconnected', function () {
 var userSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
-  company: String,
+  company: {type: String, default : null},
   webaddress: String,
   phone: Number,
   candyspeciality: String
 });
+
+userSchema.index(
+   { company: 1, webaddress: 1 },
+   { unique:  true }
+);
+
 
 // register the User model
 var UserModel = mongoose.model( 'UserModel', userSchema);

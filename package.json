@@ -4,7 +4,7 @@
   "description": "ClearScholar project challenge",
   "main": "server.js",
   "scripts": {
-    "dev": "node server && webpack-dev-server --watch --colors ",
+    "dev": "webpack-dev-server --watch --colors ",
     "build": "rimraf dist && NODE_ENV=production webpack --colors",
     "start": "NODE_ENV=production PORT=8080 pm2 start ./server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
@@ -48,7 +48,8 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.11.0",
     "react-tap-event-plugin": "^2.0.1",
-    "lodash.assign": "^4.2.0"
+    "lodash.assign": "^4.2.0",
+    "jquery"  : "3.1.1"
   },
   "keywords": [
     "ExpressJS",
