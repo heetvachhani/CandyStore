@@ -59775,7 +59775,17 @@ var styles = {
     MsUserSelect: 'none',
     userSelect: 'none',
     backgroundImage: 'none',
-    border: '1px solid transparent'
+    border: '1px solid transparent',
+    marginLeft: '6%'
+  },
+  container: {
+    position: 'fixed',
+    top: '20%',
+    left: '50%',
+    marginTop: '-100px',
+    marginLeft: '-200px',
+    width: '65%',
+    padding: '20px'
   }
 };
 
@@ -59786,40 +59796,46 @@ var Form = function Form(props) {
       submitting = props.submitting;
 
   return _react2.default.createElement(
-    'form',
-    { onSubmit: handleSubmit },
-    _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: renderTextField, type: 'text', label: 'First Name' }),
-    _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: renderTextField, type: 'text', label: 'Last Name' }),
-    _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: renderTextField, type: 'text', label: 'company' }),
-    _react2.default.createElement(_reduxForm.Field, { name: 'web', component: renderTextField, type: 'text', label: 'web' }),
-    _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: renderTextField, type: 'text', label: 'Phone' }),
+    'div',
+    { style: styles.container },
     _react2.default.createElement(
-      _reduxForm.Field,
-      { name: 'speciality', component: renderSelectField, label: 'Candy Speciality' },
-      _react2.default.createElement(
-        'option',
-        { value: 'chocolate' },
-        'Chocolate'
-      ),
-      _react2.default.createElement(
-        'option',
-        { value: 'lollipop' },
-        'Lollipops'
-      ),
-      _react2.default.createElement(
-        'option',
-        { value: 'gum' },
-        'Gum'
-      ),
-      _react2.default.createElement(
-        'option',
-        { value: 'sour' },
-        'Sour Hard Cndies'
-      )
+      'h3',
+      null,
+      ' Welcome to Candy Store! '
     ),
     _react2.default.createElement(
-      'div',
-      null,
+      'form',
+      { onSubmit: handleSubmit },
+      _react2.default.createElement(_reduxForm.Field, { name: 'fname', component: renderTextField, type: 'text', label: 'First Name' }),
+      _react2.default.createElement(_reduxForm.Field, { name: 'lname', component: renderTextField, type: 'text', label: 'Last Name' }),
+      _react2.default.createElement(_reduxForm.Field, { name: 'cname', component: renderTextField, type: 'text', label: 'Company Name' }),
+      _react2.default.createElement(_reduxForm.Field, { name: 'web', component: renderTextField, type: 'text', label: 'Web Address' }),
+      _react2.default.createElement(_reduxForm.Field, { name: 'phone', component: renderTextField, type: 'text', label: 'Phone Number' }),
+      _react2.default.createElement(
+        _reduxForm.Field,
+        { name: 'speciality', component: renderSelectField, label: 'Candy Speciality' },
+        _react2.default.createElement(
+          'option',
+          { value: 'chocolate' },
+          'Chocolate'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'lollipop' },
+          'Lollipops'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'gum' },
+          'Gum'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'sour' },
+          'Sour Hard Cndies'
+        )
+      ),
+      _react2.default.createElement(_reduxForm.Field, { name: 'date', component: renderTextField, type: 'text', label: 'Date Added' }),
       _react2.default.createElement(
         'button',
         { type: 'submit', style: styles.btn, disabled: pristine || submitting },
@@ -59831,27 +59847,22 @@ var Form = function Form(props) {
 
 var validate = function validate(values) {
   var errors = {};
-  if (!values.fname) {
-    errors.fname = 'Please enter a first name';
-  }
-  if (!values.lname) {
-    errors.lname = 'Please enter a last name';
-  }
-  if (!values.cname) {
-    errors.cname = 'Please enter a company name';
-  }
-  if (!values.web) {
-    errors.web = 'Please enter a web address';
-  }
-  if (!values.phone) {
-    errors.phone = 'Please enter a phone number';
-  }
-  if (!/^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/.test(values.web)) {
-    errors.web = 'Invalid web address';
-  }
-  if (!/^\d{10}$/.test(values.phone)) {
-    errors.phone = 'Invalid phone number';
-  }
+  if (!values.fname) errors.fname = 'Please enter a first name';
+
+  if (!values.lname) errors.lname = 'Please enter a last name';
+
+  if (!values.cname) errors.cname = 'Please enter a company name';
+
+  if (!values.web) errors.web = 'Please enter a web address';
+
+  if (!values.phone) errors.phone = 'Please enter a phone number';
+
+  if (!values.date) errors.date = 'Please enter a Date';
+
+  if (!/^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/.test(values.web)) errors.web = 'Invalid web address';
+
+  if (!/^\d{10}$/.test(values.phone)) errors.phone = 'Invalid phone number';
+
   return errors;
 };
 
@@ -59917,7 +59928,8 @@ var SelectFieldGroup = function SelectFieldGroup(_ref) {
       height: 'auto',
       width: '32%',
       padding: '16px 9px 3px',
-      fontSize: '20px',
+      fontSize: '18px',
+      fontWeight: '100',
       lineHeight: '1.42857143',
       letterSpacing: '1px',
       color: '#555',
@@ -60015,7 +60027,7 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
       position: 'absolute',
       top: '0px',
       left: '0px',
-      fontSize: '12px',
+      fontSize: '12.5px',
       color: '#00A1DF',
       fontWeight: '100',
       padding: '2px 9px',
@@ -60029,7 +60041,8 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
       height: 'auto',
       width: '30%',
       padding: '16px 9px 3px',
-      fontSize: '20px',
+      fontSize: '18px',
+      fontWeight: '100',
       lineHeight: '1.42857143',
       letterSpacing: '1px',
       color: '#555',
@@ -60176,18 +60189,18 @@ var showResults = function showResults(values) {
     setTimeout(function () {
       // simulate server latency
       window.alert('You submitted:\n\n' + JSON.stringify(values, null, 2));
-      // $.ajax({
-      //               url: "/candy",
-      //               type: 'POST',
-      //               data: values,
-      //               beforeSend: function() {
-      //                   $("#msg").html("sending...");
-      //               },
-      //               success: function(data) {
-      //                   $("#msg").hide();
-      //                   $("#response").html(data);
-      //               }
-      //           });
+      _jquery2.default.ajax({
+        url: "/candy",
+        type: 'POST',
+        data: values,
+        beforeSend: function beforeSend() {
+          (0, _jquery2.default)("#msg").html("sending...");
+        },
+        success: function success(data) {
+          (0, _jquery2.default)("#msg").hide();
+          (0, _jquery2.default)("#response").html(data);
+        }
+      });
       resolve();
     }, 500);
   });
