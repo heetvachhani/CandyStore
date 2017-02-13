@@ -20,7 +20,7 @@ var gulp = require('gulp'),
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./public/main.js'],
+  entries: ['./public/js/main.js'],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
@@ -45,7 +45,7 @@ function bundle() {
     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
        // Add transformation tasks to the pipeline here.
     .pipe(sourcemaps.write('./')) // writes .map file
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./public/dist'))
 }
 
 
@@ -63,27 +63,27 @@ function bundle() {
 
 gulp.task('html', function () {
   return gulp.src('./public/index.html')
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./public/dist/'))
 });
 
 
 gulp.task('styles', function() {
   return gulp.src('public/styles.css')
     .pipe(csscomb())
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest('./public/dist/css'));
 });
 
 gulp.task('watch', function() {
   //gulp.watch('src/stylus/**/*.styl', ['stylus']);
   gulp.watch('public/index.html', ['html']);
-  gulp.watch('dist/index.html').on('change', browserSync.reload);
-  gulp.watch('dist/bundle.js').on('change', browserSync.reload);
+  gulp.watch('public/dist/index.html').on('change', browserSync.reload);
+  gulp.watch('public/dist/bundle.js').on('change', browserSync.reload);
 });
 
 gulp.task('serve', function() {
   browserSync({
     server: {
-        baseDir: "./dist"
+        baseDir: "./public/dist"
     }
   });
 });
