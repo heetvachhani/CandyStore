@@ -98,9 +98,6 @@ const validate = values => {
   if (!values.lname) 
     errors.lname = 'Please enter a last name';
   
-  if (!values.cname) 
-    errors.cname = 'Please enter a company name';
-  
   if (!values.web) 
     errors.web = 'Please enter a web address';
   

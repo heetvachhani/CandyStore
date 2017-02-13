@@ -27,7 +27,7 @@ exports.postOneHandler = function(req, res){
 
   var message;
   var newRecord = new UserModel();
-  	newRecord.firstname = fname;
+  newRecord.firstname = fname;
 	newRecord.lastname = lname;
 	newRecord.company = cname;
 	newRecord.webaddress = web;
@@ -56,9 +56,10 @@ exports.postOneHandler = function(req, res){
 				  if(err){
 				  	if (err.code === 11000) { //error for dupes
 			                console.log("Company and website name are same. Error 1");
-			                console.log(err);
+			                res.status(500).send({status:500, message: 'Company and website name are same. Error 1', type:'internal'}); 
+                      //next(new Error('Something went wrong :-('));  
 			            }  
-				     res.json(false);
+				     
 				     console.log(newRecord.firstname + " could not be added");
 				   }else{
 				     res.json(true);

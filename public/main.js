@@ -5,7 +5,6 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import App from './components/App';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Form from './components/Form';
 import { connect } from 'react-redux';
@@ -39,18 +38,19 @@ const store = createStoreWithMiddleware(reducer);
 const showResults = values =>
   new Promise(resolve => {
     setTimeout(() => {  // simulate server latency
-     window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-      		$.ajax({
+     		$.ajax({
           		url: "/candy",
          		type: 'POST',
 		        data: values,
 		        beforeSend: function() {
-		        	$("#msg").html("sending...");
+		        	
 		        },
 		        success: function(data) {
-			        $("#msg").hide();
-			        $("#response").html(data);
-		        }
+			        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+		        },
+		        error: function(xhr, status, error) {
+				    window.alert(xhr.responseText + "  eerr: " + error);
+				}
           	});
       resolve()
     }, 500)
