@@ -6,10 +6,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import Form from './components/Form';
+import App from './components/App';
 import { connect } from 'react-redux';
-import { reducer as reduxFormReducer } from 'redux-form'
-import $ from 'jquery';
+import { reducer as reduxFormReducer } from 'redux-form';
+import { reducers as mainReducers }from './reducers/reducers';
+
 
 injectTapEventPlugin();
 
@@ -35,32 +36,11 @@ const crashReporter = store => next => action => {
 const createStoreWithMiddleware = applyMiddleware(thunk, logger, crashReporter)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-const showResults = values =>
-  new Promise(resolve => {
-    setTimeout(() => {  // simulate server latency
-     		$.ajax({
-          		url: "/candy",
-         		type: 'POST',
-		        data: values,
-		        beforeSend: function() {
-		        	
-		        },
-		        success: function(data) {
-			        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-		        },
-		        error: function(xhr, status, error) {
-				    window.alert(xhr.responseText + "  eerr: " + error);
-				}
-          	});
-      resolve()
-    }, 500)
-  })
-
 
 ReactDOM.render(
  
   <Provider store={store}>
     <MuiThemeProvider>
-      <Form onSubmit={showResults}/>
+      <App />
   	</MuiThemeProvider>
   </Provider>, document.getElementById('app'));

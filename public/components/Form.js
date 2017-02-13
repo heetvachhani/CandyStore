@@ -46,23 +46,12 @@ const styles = {
       backgroundImage: 'none',
       border: '1px solid transparent',
       marginLeft:'6%'
-    },
-    container: {
-      position: 'fixed',
-      top: '20%',
-      left: '50%',
-      marginTop: '-100px',
-      marginLeft: '-200px',
-      width: '65%',
-      padding: '20px'
     }
  };
 
 const Form = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <div style={styles.container}>
-      <h3> Welcome to Candy Store! </h3>
       <form onSubmit={handleSubmit}>
           <Field name="fname" component={renderTextField} type="text" label="First Name"/>
    
@@ -86,7 +75,6 @@ const Form = (props) => {
 
         <button type="submit" style={styles.btn} disabled={pristine || submitting}>Submit</button>
       </form>
-    </div>
   )
 }
 

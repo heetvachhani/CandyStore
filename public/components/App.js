@@ -1,61 +1,69 @@
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-const styles = {
-  floatingLabelStyle: {
-    color: '#00A1DF'
-  }
-};
+import Form from './Form';
+import * as AppActions from '../action/actions';
+import { connect } from 'react-redux';
+import $ from 'jquery';
+
+const mapStateToProps = state => ({
+	appDialogIsOpen: state.isDialogOpen
+});
+
+const mapDispatchToProps = dispatch => ({
+  	actions: AppActions
+});
 
 
-export default class App extends Component {
+
+class App extends Component {
+  	
+  	_handleSubmit = () => {
+		console.log("before" + this.props.appDialogIsOpen);
+		this.props.actions.toggleDialog();
+		console.log("aftre" + this.props.appDialogIsOpen);
+	}
+
+	 _showResults = values =>
+	  new Promise(resolve => {
+	    setTimeout(() => {  // simulate server latency
+	     		$.ajax({
+	          		url: "/candy",
+	         		type: 'POST',
+			        data: values,
+			        beforeSend: function() {
+			        	
+			        },
+			        success: function(data) {
+				        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+			        },
+			        error: function(xhr, status, error) {
+					    window.alert(xhr.responseText + "  eerr: " + error);
+					}
+	          	});
+	      resolve()
+	    }, 500)
+  });
+
 
   render() {
+  	 const styles = {
+      container: {
+	      position: 'fixed',
+	      top: '20%',
+	      left: '50%',
+	      marginTop: '-100px',
+	      marginLeft: '-200px',
+	      width: '65%',
+	      padding: '20px'
+   	  }
+	};
   	return (
-		<div>
-			<form>
-			<TextField
-		      floatingLabelText="First Name"
-		      floatingLabelFixed={true}
-		      floatingLabelStyle={styles.floatingLabelStyle}
-		    /><br />
-		    <TextField
-		      floatingLabelText="Last Name"
-		      floatingLabelFixed={true}
-		      floatingLabelStyle={styles.floatingLabelStyle}
-		    /><br />
-		    <TextField
-		      floatingLabelText="Company"
-		      floatingLabelFixed={true}
-		      floatingLabelStyle={styles.floatingLabelStyle}
-			/><br />
-		    <TextField
-		      floatingLabelText="Web Address"
-		      floatingLabelFixed={true}
-		      floatingLabelStyle={styles.floatingLabelStyle}
-		    /><br />
-		    <TextField
-		      floatingLabelText="Phone Number"
-		      floatingLabelFixed={true}
-		      floatingLabelStyle={styles.floatingLabelStyle}
-		    /><br />
-		    <SelectField
-		          floatingLabelText="Candy Specialty"
-		          floatingLabelStyle={styles.floatingLabelStyle}
-		          value={1}
-		          onChange={this.handleChange}
-		        >
-		          <MenuItem value={1} primaryText="Chocolate" />
-		          <MenuItem value={2} primaryText="Lollipops" />
-		          <MenuItem value={3} primaryText="Gum" />
-		          <MenuItem value={4} primaryText="Sour hard candies" />
-		    </SelectField><br />
-		  	<RaisedButton label="Submit" primary={true} />
-		  	</form>
-		</div>
+		<div style={styles.container}>
+     		<h3> Welcome to Candy Store! </h3>
+     		<Form onSubmit={this._showResults} />
+    	</div>
   	);
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
